@@ -27,7 +27,8 @@ router=APIRouter(
 def get_posts(db: Session = Depends(get_db),current_user:int=Depends(oauth2.get_current_user),Limit:int=10,skip:int=0,search:Optional[str]=''):
     # posts=db.query(models.Post).filter(models.Post.title.contains(search)).limit(Limit).offset(skip).all()
     result=db.query(models.Post,func.count(models.Vote.post_id).label('votes')).join(models.Vote, models.Vote.post_id==models.Post.id,isouter=True).group_by(models.Post.id).filter(models.Post.title.contains(search)).limit(Limit).offset(skip).all()
-    # print(result) you can print the query
+    #  you can print the query
+    print(result)
     # print(current_user.email) logged in user
     return result
 
@@ -38,7 +39,8 @@ def get_posts(
     current_user:int=Depends(oauth2.get_current_user)
     ):
     posts=db.query(models.Post).filter(models.Post.owner_id==current_user.id).all()
-    print(current_user.email)
+    # print(current_user.email)
+    print(db.query(models.Post))
     return posts
 
 #To create a post

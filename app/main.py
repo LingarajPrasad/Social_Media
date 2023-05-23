@@ -9,8 +9,7 @@ app=FastAPI()
 
 pwd_context = CryptContext(schemes = ["bcrypt"], deprecated = 'auto')
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
+
     "http://localhost",
     "http://localhost:8080",
 ]
@@ -30,4 +29,4 @@ app.include_router(vote.router)
 #entry point
 @app.get("/")
 async def root():
-    return {"message": "welcome to my API"}
+    return {"message": "Welcome To My API"}
